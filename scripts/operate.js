@@ -13,6 +13,7 @@ export function operate(a, b, o) {
 
     a = Number(a);
     b = Number(b);
+    o = String(o);
 
     const operations = {
         '+': add,
@@ -25,4 +26,5 @@ export function operate(a, b, o) {
     return operations[o](a, b);
 
 }
+
 

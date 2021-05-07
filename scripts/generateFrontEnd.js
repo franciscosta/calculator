@@ -1,6 +1,6 @@
 
 
-export function genFrontEnd() {
+export function generateFrontEnd() {
 
     let buttons = document.querySelector('.buttons');
 

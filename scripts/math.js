@@ -23,5 +23,5 @@ export const  modulo = (a, b) => {
 };
 
 
-// export {add, subtract, multiply, divide, modulo};
+
 

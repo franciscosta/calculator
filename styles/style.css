@@ -62,6 +62,7 @@ body {
     font-size: 2.2em;
     cursor: pointer;
     transition: background-color .15s;
+    opacity: 1;
 }
 
 .larger {
@@ -101,6 +102,10 @@ body {
 
 .green:hover {
     background-color: #4e7c53;
+}
+
+.operator-selected {
+    opacity: .6;
 }
 
 /* .buttons .left {
