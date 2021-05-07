@@ -1,0 +1,118 @@
+@font-face {
+    font-family: 'Century Gothic';
+    src: url('../assets/gothicb.ttf');
+}
+
+
+body {
+    background-color: #040d21;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Century Gothic', Tahoma, sans-serif;
+}
+
+.outer-container {
+    width: 92% !important;
+    max-width: 450px;
+    min-height: 200px;
+    /* border: 1px solid orange; */
+    position: relative;
+}
+
+.screen {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content:flex-end;
+    margin-bottom: 30px;
+}
+
+.number {
+    color: white;
+    font-size: 5em;
+    font-weight: 100;
+    display: block;
+    padding-right: 25px;
+}
+
+.buttons {
+    width: 90%;
+    min-height: 100px;
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: repeat(4, 24%);
+    column-gap: 20px;
+    row-gap: 20px;
+    /* padding: 20px; */
+}
+
+.button {
+    background-color: #283041;
+    width: 100%;
+    height: 0;
+    padding-top: 51%;
+    padding-bottom: 49%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    font-size: 2.2em;
+    cursor: pointer;
+    transition: background-color .15s;
+}
+
+.larger {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    padding-top: 21%;
+    padding-bottom: 23%;
+    border-radius: 56px;
+}
+
+.mid-gray {
+    background-color: #4a5160;
+}
+
+.mid-gray img, div[data-number="17"] img {
+    filter: invert(1);
+    opacity: .7;
+}
+
+.mid-gray:hover {
+    background-color: #6e778c;
+}
+
+.digit {
+    background-color: #283041;
+    color: rgba(255, 255, 255, .7);
+}
+
+.digit:hover {
+    background-color: #4a5160;
+}
+
+.green {
+    background-color: #a5ff90;
+    fill: #040d21;
+}
+
+.green:hover {
+    background-color: #4e7c53;
+}
+
+/* .buttons .left {
+    width: 75%;
+    min-height: 100px;   
+    display: inline-block;
+    background-color: grey;
+}
+
+.buttons .right {
+    width: 25%;
+    min-height: 100px;   
+    display: inline-block;
+    background-color: orange;
+} */
