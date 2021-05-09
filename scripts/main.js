@@ -9,5 +9,5 @@ generateFrontEnd();
 // Listen and calculate
 
 window.addEventListener('click', e => calculator(e));
-window.addEventListener('touchstart', e => calculator(e));
+// window.addEventListener('touchstart', e => calculator(e));
 window.addEventListener('keydown', e => calculator(e));
