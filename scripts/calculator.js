@@ -40,6 +40,7 @@ function updateNumbers(event, number) {
         calc[number] = '-';
     }
 
+    calc[number] += event;
     calc[`${number}Started`] = true;
 
     // If its a number, append
