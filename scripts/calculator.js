@@ -34,7 +34,7 @@ const isPlusMinus = e => e == '+-';
 function updateNumbers(event, number) {
 
     // If its at zero, reset
-    if (calc[number] === "0") {
+    if (calc[number] == "0") {
         calc[number] = "";
     } else if (calc[number] === '-0') {
         calc[number] = '-';
@@ -43,7 +43,9 @@ function updateNumbers(event, number) {
     calc[`${number}Started`] = true;
 
     // If its a number, append
-    if (isInt(event)) calc[number] += event;
+    if (isInt(event)) {
+        calc[number] += event;
+    }
 
 }
 
@@ -236,6 +238,7 @@ export function calculator(e) {
         result();
     }
 
+    console.log(calc.first, calc.operator, calc.second)
 
 }
 
