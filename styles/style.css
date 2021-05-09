@@ -124,7 +124,11 @@ body {
 @media screen and (max-width: 900px) {
     
     body {
-        max-height: 85vh;
+        max-height: 85vh;scale: 0.9;
+    }
+
+    .number {
+        padding-right: 5px;
     }
 
 }
