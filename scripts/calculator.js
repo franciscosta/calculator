@@ -43,11 +43,6 @@ function updateNumbers(event, number) {
     calc[number] += event;
     calc[`${number}Started`] = true;
 
-    // If its a number, append
-    if (isInt(event)) {
-        calc[number] += event;
-    }
-
 }
 
 function addDot(event, number) {
