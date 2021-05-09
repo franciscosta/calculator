@@ -36,6 +36,8 @@ function updateNumbers(event, number) {
     // If its at zero, reset
     if (calc[number] === "0") {
         calc[number] = "";
+    } else if (calc[number] === '-0') {
+        calc[number] = '-';
     }
 
     calc[`${number}Started`] = true;
@@ -46,6 +48,8 @@ function updateNumbers(event, number) {
 }
 
 function addDot(event, number) {
+
+    calc[`${number}Started`] = true;
 
     // Dot Management
     if (!calc[`${number}Dot`]) {
@@ -60,16 +64,33 @@ function addDot(event, number) {
 
 function setOperator(event) {
 
+    calc.firstStarted = true;
+
     // Update button
     calc.operator = event;
     calc.operatorStarted = true;
 
     updateOperatorInFrontEnd(event);
 
+}
+
+function plusMinus(number) {
+    
+    if (calc[number][0] == '-') {
+        calc[number] = calc[number].substring(1);
+    } else {
+        calc[number] = '-' + calc[number];
+    }
 
 }
 
 function result() {
+
+    if (calc.first == '') {
+        calc.first = '0';
+    } else if (calc.second == '') {
+        calc.second = '0';
+    }
 
     calc.first = operate(calc.first, calc.second, calc.operator);
     calc.firstDot = true;
@@ -81,6 +102,7 @@ function result() {
 
     calc.operator = undefined;
     calc.operatorStarted = false;
+
     resetOperatorFrontEnd();
     
     calc.continuous = true;
@@ -137,43 +159,37 @@ function updateScreenInFrontEnd(number) {
 export function calculator(e) {
 
     // Parse the event and get the data
+
     let event = eventManager(e);
+
+    // If c 
 
     if (event == 'c') {
         reset();
     }
 
-    // 1. First Number Operator
-    if (!calc.secondStarted && !calc.operatorStarted) {
+    // Handle continuous mode
 
-        // If continuous is on but nothing else is, reset
-        if (calc.continuous && !calc.operatorStarted && !calc.secondStarted && calc.firstStarted) {
-            if (isInt(event) || isDot(event)) {
-                calc.first = '0';
-                calc.continuous = false;
-            } else {
-                setOperator(event);
-            }
-            
+    if (!calc.operatorStarted && !calc.secondStarted && calc.continuous) {
+
+        if (isInt(event) || isDot(event)) {
+            reset();
         }
+        
+    }
 
+
+
+    // State 1: First number, first time
+
+    if (!calc.operatorStarted && !calc.secondStarted) {
 
         if (isInt(event)) {
             updateNumbers(event, 'first');
         } else if (isDot(event)) {
             addDot(event, 'first');
         } else if (isPlusMinus(event)) {
-
-            if (calc.continuous) {
-                reset();
-                calc.first = '';
-            }
-
-            if (calc.first[0] == '-') {
-                calc.first = calc.first.substring(1);
-            } else {
-                calc.first = '-' + calc.first;
-            }
+            plusMinus('first');
         }
 
         updateScreenInFrontEnd('first');
@@ -181,22 +197,26 @@ export function calculator(e) {
     }
 
 
-    // 2. Operator Magic
+    // Stage 2: Operator Magic
+
     operatorList.forEach(operator => {
-        if (event == operator && !calc.secondStarted && !calc.continuous) {
-            setOperator(event);
-        } else if (event == operator && calc.secondStarted && !calc.continuous) {
-            result();
-            setOperator(event);
-        } else if (event == operator && calc.secondStarted && calc.continuous) {
-            result();
-            setOperator(event);
+
+        if (event == operator) {
+
+            if (!calc.secondStarted) { 
+                setOperator(event);
+            } else {
+                result();
+                setOperator(event);
+            }
+
         }
+    
     });
 
-    
 
-    // 3. Second Number
+    // Stage 3: Second number, first time
+    
     if (calc.firstStarted && calc.operatorStarted) {
 
         if (isInt(event)) {
@@ -204,22 +224,17 @@ export function calculator(e) {
         } else if (isDot(event)) {
             addDot(event, 'second');
         } else if (isPlusMinus(event)) {
-            if (calc.second[0] == '-') {
-                calc.second = calc.second.substring(1);
-            } else {
-                calc.second = '-' + calc.second;
-            }
+            plusMinus('second');
         }
 
         updateScreenInFrontEnd('second');
 
     }
 
-    // 4. Equals
+    //   Stage 4: Equals
     if (isEcqual(event) || event == 'enter') {
         result();
     }
-
 
 
 }
