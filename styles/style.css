@@ -17,7 +17,6 @@ body {
     width: 92% !important;
     max-width: 450px;
     min-height: 200px;
-    /* border: 1px solid orange; */
     position: relative;
 }
 
@@ -121,3 +120,11 @@ body {
     display: inline-block;
     background-color: orange;
 } */
+
+@media screen and (max-width: 900px) {
+    
+    body {
+        max-height: 85vh;
+    }
+
+}
