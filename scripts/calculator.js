@@ -234,7 +234,6 @@ export function calculator(e) {
         result();
     }
 
-    console.log(calc.first, calc.operator, calc.second)
 
 }
 
